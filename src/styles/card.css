@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     outline: red solid 5px;
+    font-size: .5rem;
 }
 
 .sprite{
