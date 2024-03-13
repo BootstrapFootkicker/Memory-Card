@@ -3,8 +3,26 @@
     flex-direction: column;
     outline: red solid 5px;
     font-size: .5rem;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.sprite-container
+{
+width: 100%;
+}
+
+.card-info-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sprite{
-
+   width: 100%;
+    height: auto;
 }
