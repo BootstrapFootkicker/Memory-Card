@@ -1,5 +1,5 @@
 import "..//styles/card.css";
-export function Card({ sprite, name, types }) {
+export function Card({ sprite, name, types,eventTrigger }) {
   return (
     <div className={"card"}>
       {sprite && (
@@ -9,7 +9,7 @@ export function Card({ sprite, name, types }) {
       )}
       <div className={"card-info-container"}>
         <h1>{name}</h1>
-        <button onClick={() => console.log(types)}>Log Pokemon Data</button>
+        <button onClick={eventTrigger}>Log Pokemon Data</button>
       </div>
     </div>
   );

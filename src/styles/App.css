@@ -1,0 +1,19 @@
+.game-header{
+    display:flex;
+    box-sizing: border-box;
+    outline: red solid 1px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-score{
+    display: flex;
+    flex-direction: column;
+}

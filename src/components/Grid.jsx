@@ -1,26 +1,50 @@
 import "..//styles/grid.css";
-export function Grid({ pokemonData }) {
-  return (
-    <div className={"grid-wrapper"}>
-      <div className={"card-grid"}>
-        {pokemonData.map((pokemon, index) => (
-          <div className={"card"} key={index}>
-            <div className={"sprite-container"}>
-              <img
-                className={"sprite"}
-                src={pokemon.sprites.front_default}
-                alt="pokemon"
-              />
-              <div className={"card-info-container"}>
-                <h1>{pokemon.name}</h1>
-                <button onClick={() => console.log(pokemon.types)}>
-                  Log Pokemon Data
-                </button>
-              </div>
+import {Card} from "./Card.jsx";
+import {Header} from "./Header.jsx";
+import { useState, useEffect } from "react";
+
+export function Grid({pokemonData}) {
+    const [cardList, setCardList] = useState([]);
+    const [shuffledData, setShuffledData] = useState([]);
+
+    useEffect(() => {
+        shuffleCards();
+    }, [pokemonData]);
+
+    useEffect(() => {
+        const newCardList = shuffledData.map((pokemon, index) => {
+            return (
+                <Card
+                    key={index}
+                    sprite={pokemon.sprites.front_default}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                    eventTrigger={shuffleCards}
+                />
+            );
+        });
+
+        setCardList(newCardList);
+    }, [shuffledData]);
+
+    function shuffleCards() {
+        const shuffled = [...pokemonData];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        setShuffledData(shuffled);
+        console.log("shuffled");
+    }
+
+    return (
+        <>
+            <Header/>
+            <div className={"grid-wrapper"}>
+                <div className={"card-grid"}>
+                    {cardList}
+                </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </>
+    );
 }

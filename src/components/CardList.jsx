@@ -19,5 +19,6 @@ export function CardList() {
     );
   });
 
+
   return cardList;
 }
