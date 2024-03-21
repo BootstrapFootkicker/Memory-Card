@@ -9,6 +9,7 @@ export function DataHandler() {
     const loadPokemon = async () => {
       const pokemonNames = await axios.get(
         "https://pokeapi.co/api/v2/pokemon?limit=10",
+
       );
 
       //uses pokemon name data to get the pokemon data i.e. sprite, name, types
@@ -19,6 +20,8 @@ export function DataHandler() {
           );
           return response.data;
         }),
+
+
       );
 
       setPokemonData(pokemonPull);
@@ -27,6 +30,7 @@ export function DataHandler() {
     //runs the loadPokemon function so data is available on mount
     loadPokemon();
   }, []);
+
 
   return pokemonData;
 }

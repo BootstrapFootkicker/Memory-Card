@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 export function Grid({pokemonData}) {
     const [cardList, setCardList] = useState([]);
     const [shuffledData, setShuffledData] = useState([]);
+    const [score, setScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+    const[clicked, setClicked] = useState([]);
 
     useEffect(() => {
         shuffleCards();
@@ -19,7 +22,7 @@ export function Grid({pokemonData}) {
                     sprite={pokemon.sprites.front_default}
                     name={pokemon.name}
                     types={pokemon.types}
-                    eventTrigger={shuffleCards}
+                    eventTrigger={cardClick}
                 />
             );
         });
@@ -27,6 +30,19 @@ export function Grid({pokemonData}) {
         setCardList(newCardList);
     }, [shuffledData]);
 
+    function cardClick(name) {
+            if (clicked.includes(name)) {
+                if (score > highScore) {
+                    setHighScore(score);
+                }
+                setScore(0);
+                setClicked([]);
+            } else {
+                setScore(score + 1);
+                setClicked([...clicked, name]);
+            }
+        shuffleCards();
+    }
     function shuffleCards() {
         const shuffled = [...pokemonData];
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -39,7 +55,7 @@ export function Grid({pokemonData}) {
 
     return (
         <>
-            <Header/>
+            <Header currentScore={score} highScore={highScore}/>
             <div className={"grid-wrapper"}>
                 <div className={"card-grid"}>
                     {cardList}
