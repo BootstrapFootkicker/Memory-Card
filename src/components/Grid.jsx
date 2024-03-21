@@ -10,11 +10,13 @@ export function Grid({pokemonData}) {
     const [highScore, setHighScore] = useState(0);
     const[clicked, setClicked] = useState([]);
 
+    //shuffles the cards on mount and when the pokemon data changes
     useEffect(() => {
         shuffleCards();
     }, [pokemonData]);
 
     useEffect(() => {
+        //maps the pokemon data to the card component
         const newCardList = shuffledData.map((pokemon, index) => {
             return (
                 <Card
@@ -29,7 +31,6 @@ export function Grid({pokemonData}) {
 
         setCardList(newCardList);
     }, [shuffledData]);
-
     function cardClick(name) {
             if (clicked.includes(name)) {
                 if (score > highScore) {
